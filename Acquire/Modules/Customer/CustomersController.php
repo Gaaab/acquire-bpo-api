@@ -173,9 +173,9 @@ class CustomersController extends Controller
         return $this->customerService->updateCustomer($customer, $request->validated());
     }
 
-    #[Route('/api/customers/{post}/archive', methods: ['DELETE'], name: 'delete_customer')]
+    #[Route('/api/customers/{customer}/archive', methods: ['DELETE'], name: 'delete_customer')]
     #[OA\Delete(
-        path: '/api/customers/{post}',
+        path: '/api/customers/{customer}',
         summary: 'Delete a customer by ID',
         tags: ['Customers'],
         parameters: [
@@ -183,7 +183,7 @@ class CustomersController extends Controller
                 name: 'customer',
                 in: 'path',
                 required: true,
-                description: 'ID of the post to be archived',
+                description: 'ID of the customer to be archived',
                 schema: new OA\Schema(type: 'integer')
             ),
             new OA\Parameter(
@@ -196,7 +196,7 @@ class CustomersController extends Controller
         ],
         responses: [
             new OA\Response(response: 200, description: 'Customer removed successfully'),
-            new OA\Response(response: 404, description: 'No query results for model Post'),
+            new OA\Response(response: 404, description: 'No query results for model Customer'),
             new OA\Response(response: 422, description: 'Record Deletion Error'),
         ],
         security: [
