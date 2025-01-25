@@ -1,0 +1,486 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Aquire BPO Coding Exam Api Documentation",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "operationId": "c023bd0734afa42ed767f18ef8cea957",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Login credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "test@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "JWT_TOKEN_HERE"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "expires_at": {
+                                            "type": "string",
+                                            "example": "0000-00-00 00:00:00"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "format": "email",
+                                                    "example": "test@example.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        },
+        "/api/customers": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Retrieve all customers",
+                "operationId": "16521d2773fd96b2fedc516c6fdb7156",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "All customers retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "Customer First Name."
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Customer Last Name"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "customer@sample.com"
+                                            },
+                                            "age": {
+                                                "type": "integer",
+                                                "example": 32
+                                            },
+                                            "dob": {
+                                                "type": "string",
+                                                "example": "2025-01-01"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorize - User does not exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "The following user does not exists."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": {
+                    "sanctum": {
+                        "bearerAuth": []
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create a new customers",
+                "operationId": "c97666f63693bf91db581304753bcc82",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Customer details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Customer First Name."
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Customer Last Name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "customer@sample.com"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 32
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "example": "2025-01-01"
+                                    },
+                                    "creation_date": {
+                                        "type": "string",
+                                        "example": "2025-01-01"
+                                    },
+                                    "created_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "0000-00-00 00:00:00"
+                                    },
+                                    "updated_at": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "0000-00-00 00:00:00"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Returns the Customer Model Object"
+                    },
+                    "422": {
+                        "description": "Customer Create Validation Error"
+                    }
+                },
+                "security": {
+                    "sanctum": {
+                        "bearerAuth": []
+                    }
+                }
+            }
+        },
+        "/api/customers/update/{customer}": {
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update a customer by ID",
+                "operationId": "6a6294e642b08562f947d54e86f04899",
+                "parameters": [
+                    {
+                        "name": "customer",
+                        "in": "path",
+                        "description": "ID of the customer to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Customer update details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "example": "Customer Updated First Name"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "example": "Customer Updated Last Name"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "customer-update@example.com"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 32
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "example": "2025-01-01"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer status updated successfully"
+                    },
+                    "404": {
+                        "description": "Customer model not found"
+                    },
+                    "422": {
+                        "description": "Validation Content Error"
+                    }
+                },
+                "security": {
+                    "sanctum": {
+                        "bearerAuth": []
+                    }
+                }
+            }
+        },
+        "/api/customers/{post}": {
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Delete a customer by ID",
+                "operationId": "6b9ced9eca9818133b53884077d9b767",
+                "parameters": [
+                    {
+                        "name": "customer",
+                        "in": "path",
+                        "description": "ID of the post to be archived",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer removed successfully"
+                    },
+                    "404": {
+                        "description": "No query results for model Post"
+                    },
+                    "422": {
+                        "description": "Record Deletion Error"
+                    }
+                },
+                "security": {
+                    "sanctum": {
+                        "bearerAuth": []
+                    }
+                }
+            }
+        },
+        "/api/user/self": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Retrieve authenticated user details",
+                "operationId": "214e54bd3327529b477564d43b69071e",
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "Media type expected by the client",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Example"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "user123@example.com"
+                                        },
+                                        "email_verified_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-15 04:44:06"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-15 04:44:06"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2024-09-15 04:44:06"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized - Invalid or missing token"
+                    }
+                },
+                "security": {
+                    "sanctum": {
+                        "bearerAuth": []
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Operations related to authentication"
+        },
+        {
+            "name": "Customers",
+            "description": "Operations related to customers"
+        },
+        {
+            "name": "Users",
+            "description": "Operations related to users"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "bearerAuth": []
+            },
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter token in format (Bearer <token>)",
+                "scheme": "bearer",
+                "in": "header",
+                "bearerAuth": "bearerAuth",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

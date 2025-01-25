@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         // Run the command to create a personal access client
         Artisan::call('passport:client', [
             '--personal' => true,
@@ -32,5 +31,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Customer::factory(15)->create();
+
+        Artisan::call('l5-swagger:generate');
+
+        Artisan::call('optimize');
     }
 }
