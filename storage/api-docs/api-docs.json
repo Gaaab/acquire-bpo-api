@@ -337,18 +337,18 @@
                 }
             }
         },
-        "/api/customers/{post}": {
+        "/api/customers/{customer}": {
             "delete": {
                 "tags": [
                     "Customers"
                 ],
                 "summary": "Delete a customer by ID",
-                "operationId": "6b9ced9eca9818133b53884077d9b767",
+                "operationId": "d68c31344aa0ef63b115262924275dda",
                 "parameters": [
                     {
                         "name": "customer",
                         "in": "path",
-                        "description": "ID of the post to be archived",
+                        "description": "ID of the customer to be archived",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -370,7 +370,7 @@
                         "description": "Customer removed successfully"
                     },
                     "404": {
-                        "description": "No query results for model Post"
+                        "description": "No query results for model Customer"
                     },
                     "422": {
                         "description": "Record Deletion Error"
